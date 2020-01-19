@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../Header';
+import PropTypes from 'prop-types';
 
 function Profile(props) {
     return (
@@ -9,5 +10,10 @@ function Profile(props) {
         </section>
     );
 }
+
+Profile.propTypes = {
+    changePage: PropTypes.func.isRequired
+}
+
 
 export default Profile;
