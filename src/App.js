@@ -24,10 +24,10 @@ class App extends React.Component {
       <div className='pages'>
         {
           {
-            LOGIN: <Login changePage={this.changePage}/>,
-            REGISTRATION: <Registration changePage={this.changePage}/>,
-            MAP: <Map changePage={this.changePage}/>,
-            PROFILE: <Profile changePage={this.changePage}/>
+            LOGIN: <Login changePage={this.changePage} />,
+            REGISTRATION: <Registration changePage={this.changePage} />,
+            MAP: <Map changePage={this.changePage} />,
+            PROFILE: <Profile changePage={this.changePage} />
           }[page]
         }
       </div>

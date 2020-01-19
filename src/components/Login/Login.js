@@ -17,6 +17,10 @@ class Login extends React.Component {
         }
     }
 
+    static propTypes = {
+        changePage: PropTypes.func.isRequired
+    }
+
     handleChange = ({target}) => {
         this.setState({[target.name]: target.value});
     }
@@ -76,10 +80,6 @@ class Login extends React.Component {
             </section>
         );
     }
-}
-
-Login.propTypes = {
-    changePage: PropTypes.func.isRequired
 }
 
 export default Login;

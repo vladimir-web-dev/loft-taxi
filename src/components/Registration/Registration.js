@@ -18,6 +18,10 @@ class Registration extends React.Component {
         }
     }
 
+    static propTypes = {
+        changePage: PropTypes.func.isRequired
+    }   
+
     handleChange = ({target}) => {
         this.setState({[target.name]: target.value});
     }
@@ -98,10 +102,6 @@ class Registration extends React.Component {
             </section>
         );
     }
-}
-
-Registration.propTypes = {
-    changePage: PropTypes.func.isRequired
 }
 
 export default Registration;
