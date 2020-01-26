@@ -41,10 +41,10 @@ class App extends React.Component {
       }>
         {
           {
-            LOGIN: <LoginPage changePage={this.changePage} />,
-            REGISTRATION: <RegistrationPage changePage={this.changePage} />,
-            MAP: <MapPage changePage={this.changePage} />,
-            PROFILE: <ProfilePage changePage={this.changePage} />
+            LOGIN: <LoginPage data-testid='login-page' changePage={this.changePage} />,
+            REGISTRATION: <RegistrationPage data-testid='registration-page' changePage={this.changePage} />,
+            MAP: <MapPage data-testid='map-page' changePage={this.changePage} />,
+            PROFILE: <ProfilePage data-testid='profile-page' changePage={this.changePage} />
           }[page]
         }
       </AuthContext.Provider>      
