@@ -1,18 +1,22 @@
 import React from 'react';
 import Header from '../Header';
 import PropTypes from 'prop-types';
+import Map from '../Map';
+import { authorizationCheckHOC } from '../../HOCs'
 
-function Map(props) {
+let MapPage = props => {
     return (
         <section className='section'>
             <Header changePage={props.changePage} />
-            <h1>Map</h1>
+            <Map/>
         </section>
     );
 }
 
-Map.propTypes = {
+MapPage = authorizationCheckHOC(MapPage);
+
+MapPage.propTypes = {
     changePage: PropTypes.func.isRequired
 }
 
-export default Map;
+export default MapPage;

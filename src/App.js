@@ -1,16 +1,28 @@
 import React from 'react';
-import Login from './components/Login';
-import Registration from './components/Registration';
-import Map from './components/Map';
-import Profile from './components/Profile';
+import LoginPage from './components/LoginPage';
+import RegistrationPage from './components/RegistrationPage';
+import MapPage from './components/MapPage';
+import ProfilePage from './components/ProfilePage';
 import './App.css';
+import AuthContext from './context/AuthContext';
 
+ 
 class App extends React.Component {
-  constructor(props) {
-      super(props);
-      this.state = {
-        page: 'LOGIN'         
-      }
+  state = {
+    page: 'LOGIN',
+    isLoggedIn: false
+  }
+
+  login = (email, password) => {
+    if (email !== '' && password !== '') {
+      this.isLoggedIn = true;
+      this.changePage('MAP');
+    }   
+  }
+
+  logout = () => {
+    this.isLoggedIn = false;
+    this.changePage('LOGIN');
   }
 
   changePage = newPage => {
@@ -21,16 +33,21 @@ class App extends React.Component {
     const { page } = this.state;
 
     return (
-      <div className='pages'>
+      <AuthContext.Provider value={{
+            isLoggedIn: this.isLoggedIn,
+            login: this.login, 
+            logout: this.logout
+        }
+      }>
         {
           {
-            LOGIN: <Login changePage={this.changePage} />,
-            REGISTRATION: <Registration changePage={this.changePage} />,
-            MAP: <Map changePage={this.changePage} />,
-            PROFILE: <Profile changePage={this.changePage} />
+            LOGIN: <LoginPage changePage={this.changePage} />,
+            REGISTRATION: <RegistrationPage changePage={this.changePage} />,
+            MAP: <MapPage changePage={this.changePage} />,
+            PROFILE: <ProfilePage changePage={this.changePage} />
           }[page]
         }
-      </div>
+      </AuthContext.Provider>      
     );
   }
 }

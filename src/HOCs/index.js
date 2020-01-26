@@ -1,0 +1,1 @@
+export { authorizationCheckHOC } from './hocs';

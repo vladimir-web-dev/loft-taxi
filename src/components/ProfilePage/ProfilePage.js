@@ -1,8 +1,9 @@
 import React from 'react';
 import Header from '../Header';
 import PropTypes from 'prop-types';
+import { authorizationCheckHOC } from '../../HOCs'
 
-function Profile(props) {
+let ProfilePage = (props) => {
     return (
         <section className='section'>
             <Header changePage={props.changePage} />
@@ -11,9 +12,11 @@ function Profile(props) {
     );
 }
 
-Profile.propTypes = {
+ProfilePage = authorizationCheckHOC(ProfilePage);
+
+ProfilePage.propTypes = {
     changePage: PropTypes.func.isRequired
 }
 
 
-export default Profile;
+export default ProfilePage;
