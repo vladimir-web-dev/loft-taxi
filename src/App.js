@@ -15,13 +15,13 @@ class App extends React.Component {
 
   login = (email, password) => {
     if (email !== '' && password !== '') {
-      this.isLoggedIn = true;
+      this.setState({isLoggedIn: true});
       this.changePage('MAP');
     }   
   }
 
   logout = () => {
-    this.isLoggedIn = false;
+    this.setState({isLoggedIn: false});
     this.changePage('LOGIN');
   }
 
@@ -30,11 +30,11 @@ class App extends React.Component {
   }
 
   render() {
-    const { page } = this.state;
+    const { page, isLoggedIn } = this.state;
 
     return (
       <AuthContext.Provider value={{
-            isLoggedIn: this.isLoggedIn,
+            isLoggedIn,
             login: this.login, 
             logout: this.logout
         }

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Map from '../Map';
 import { authorizationCheckHOC } from '../../HOCs'
 
-let MapPage = props => {
+const MapPage = props => {
     return (
         <section className='section'>
             <Header changePage={props.changePage} />
@@ -13,10 +13,8 @@ let MapPage = props => {
     );
 }
 
-MapPage = authorizationCheckHOC(MapPage);
-
 MapPage.propTypes = {
     changePage: PropTypes.func.isRequired
 }
 
-export default MapPage;
+export default authorizationCheckHOC(MapPage);;

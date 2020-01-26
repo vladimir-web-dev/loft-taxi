@@ -3,7 +3,7 @@ import Header from '../Header';
 import PropTypes from 'prop-types';
 import { authorizationCheckHOC } from '../../HOCs'
 
-let ProfilePage = (props) => {
+const ProfilePage = (props) => {
     return (
         <section className='section'>
             <Header changePage={props.changePage} />
@@ -12,11 +12,9 @@ let ProfilePage = (props) => {
     );
 }
 
-ProfilePage = authorizationCheckHOC(ProfilePage);
-
 ProfilePage.propTypes = {
     changePage: PropTypes.func.isRequired
 }
 
 
-export default ProfilePage;
+export default authorizationCheckHOC(ProfilePage);
