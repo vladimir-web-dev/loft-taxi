@@ -1,15 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
-import AuthContext from '../../context/AuthContext';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { Logo } from 'loft-taxi-mui-theme';
 import { useTheme } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../modules/auth'
+import Button from '@material-ui/core/Button';
 
-function Header ({changePage}) {
-    const { logout } = React.useContext(AuthContext);
+function Header () {
     const theme = useTheme();
+    const dispatch = useDispatch();
+
+    const handleClick = e => {
+        e.preventDefault();
+        console.log(e)
+        dispatch(logout());
+    };
 
     return (
         <header className='header'>
@@ -20,23 +27,19 @@ function Header ({changePage}) {
                     </Grid>
                     <Grid item container sm={6} justify='flex-end'>
                         <Grid item>
-                            <Button onClick={() => changePage('MAP')}>Карта</Button>
+                            <Link to='/map'>Карта</Link>
                         </Grid>
                         <Grid item>
-                            <Button onClick={() => changePage('PROFILE')}>Профиль</Button>
+                            <Link to='/profile'>Профиль</Link>
                         </Grid>
                         <Grid item>
-                            <Button onClick={logout}>Выйти</Button>
+                            <Button onClick={handleClick}>Выйти</Button>
                         </Grid>
                     </Grid>
                 </Grid>
             </Paper>            
         </header>
     );
-}
-
-Header.propTypes = {
-    changePage: PropTypes.func.isRequired
 }
 
 export default Header;

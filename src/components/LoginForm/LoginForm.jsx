@@ -1,24 +1,37 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import AuthContext from '../../context/AuthContext';
+import { useDispatch } from 'react-redux';
+import { authRequest } from '../../modules/auth';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import { useTheme } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 
-
-function LoginForm (props) {
-    const { login } = React.useContext(AuthContext);
-    const [ name, setName ] = React.useState("");
+function LoginForm () {
+    const [ email, setEmail ] = React.useState("");
     const [ password, setPassword ] = React.useState("");
+
     const theme = useTheme();
+    const dispatch = useDispatch()
+ 
+    const handleSubmit = e => {
+        e.preventDefault();
+
+        const payload = {
+            email,
+            password 
+        };
+        
+        dispatch(authRequest(payload));
+        setEmail("");
+        setPassword("");        
+    };
 
     return (
         <Paper elevatio={1} style={{padding: theme.spacing(6, 6)}}>
-            <form data-testid='login-form' className='formTag' onSubmit={() => login(name, password)}>
+            <form data-testid='login-form' className='formTag' onSubmit={handleSubmit}>
                 <Grid container   direction="column">
                     <Grid item xs={12}>
                         <Typography variant="h3" component="h1" gutterBottom>
@@ -26,13 +39,13 @@ function LoginForm (props) {
                         </Typography>
                     </Grid>
                     <Grid item xs={12}>
-                        Новый пользователь? <Link data-testid='link-register' underline='none' onClick={() => props.changePage('REGISTRATION')}> Зарегистрируйтесь</Link>   
+                        Новый пользователь? <Link data-testid='link-register' to='/registration'> Зарегистрируйтесь</Link>   
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
                             data-testid='input-name' 
-                            onChange={e => setName(e.target.value)} 
-                            value={name}
+                            onChange={e => setEmail(e.target.value)} 
+                            value={email}
                             label='Имя пользователя' 
                             placeholder='Имя пользователя'
                             margin='dense'
@@ -57,10 +70,6 @@ function LoginForm (props) {
             </form>
         </Paper>    
     )
-}
-
-LoginForm.propTypes = {
-    changePage: PropTypes.func.isRequired
 }
 
 export default LoginForm;

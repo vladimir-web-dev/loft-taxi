@@ -1,1 +1,1 @@
-export { authorizationCheckHOC } from './hocs';
+export { default } from './PrivateRoute';

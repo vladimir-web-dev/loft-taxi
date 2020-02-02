@@ -1,25 +1,43 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import AuthContext from '../../context/AuthContext';
+import { useDispatch } from 'react-redux';
+import { registrationRequest } from '../../modules/auth';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
+import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import { useTheme } from '@material-ui/core/styles';
 
 function RegistrationForm (props) {
-    const { login } = React.useContext(AuthContext);
     const [ email, setEmail ] = React.useState("");
     const [ password, setPassword ] = React.useState("");
-    const [ firstName, setFirstName ] = React.useState("");
-    const [ lastName, setLastName ] = React.useState("");
-    const theme = useTheme();
+    const [ name, setName ] = React.useState("");
+    const [ surname, setSurname ] = React.useState("");
 
+    const theme = useTheme();
+    const dispatch = useDispatch()
+
+    const handleSubmit = e => {
+        e.preventDefault();
+
+        const payload = {
+            email,
+            password,
+            name,
+            surname
+        };
+        
+        dispatch(registrationRequest(payload));
+
+        setEmail("");
+        setPassword(""); 
+        setName("");
+        setSurname("");       
+    };
 
     return (
-        <form data-testid='registration-form' className='formTag' onSubmit={() => login(email, password)}>
+        <form data-testid='registration-form' className='formTag' onSubmit={handleSubmit}>
             <Paper elevatio={1} style={{padding: theme.spacing(6, 6)}}>
                 <Grid container   direction="column">
                     <Grid item xs={12}>
@@ -29,7 +47,7 @@ function RegistrationForm (props) {
                     </Grid>
                     <Grid item xs={12}>
                         Уже зарегистрированы? 
-                        <Link data-testid='link-login' underline='none' onClick={() => props.changePage('LOGIN')}> Войти</Link>   
+                        <Link data-testid='link-login' to='/login'> Войти</Link>   
                     </Grid>
                     <Grid item xs={12}>
                         <TextField 
@@ -46,9 +64,9 @@ function RegistrationForm (props) {
                         <Grid item xs={6}>
                             <TextField
                                 data-testid='input-fname'
-                                onChange={(e) => setFirstName(e.target.value)} 
-                                name='firstName' 
-                                value={firstName} 
+                                onChange={(e) => setName(e.target.value)} 
+                                name='name' 
+                                value={name} 
                                 label='Имя' 
                                 placeholder='Имя'
                                 margin='dense'
@@ -58,9 +76,9 @@ function RegistrationForm (props) {
                         <Grid item xs={6}>
                             <TextField
                                 data-testid='input-lname' 
-                                onChange={(e) => setLastName(e.target.value)} 
-                                name='lastName' 
-                                value={lastName} 
+                                onChange={(e) => setSurname(e.target.value)} 
+                                name='surname' 
+                                value={surname} 
                                 label='Фамилия' 
                                 placeholder='Фамилия' 
                                 margin='dense'
@@ -87,10 +105,6 @@ function RegistrationForm (props) {
             </Paper>          
         </form>
     )
-}
-
-RegistrationForm.propTypes = {
-    changePage: PropTypes.func.isRequired
 }
 
 export default RegistrationForm;
