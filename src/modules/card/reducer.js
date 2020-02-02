@@ -24,10 +24,15 @@ const isUpdating = handleActions({
     [cardDetailsFailure]: () => false
 }, false);
 
+const isUpdated = handleActions({
+    [cardUpdateRequest]: () => false,
+    [cardUpdateSuccess]: () => true,
+}, false);
+
 const error = handleActions({
     [cardUpdateFailure]: (_state, action) => action.payload,
     [cardUpdateSuccess]: () => "",
     [cardDetailsFailure]: (_state, action) => action.payload
 }, false)
 
-export default combineReducers({isUpdating, card, error});
+export default combineReducers({isUpdating, isUpdated, card, error});

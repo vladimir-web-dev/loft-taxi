@@ -37,9 +37,5 @@ export const mwRegistration = store => next => action => {
         );
     }
 
-    var test = next(action);
-
-    console.log(store.getState());
-
-    return test;
+    next(action);;
 };
