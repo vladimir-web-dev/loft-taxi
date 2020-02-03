@@ -5,7 +5,7 @@ import RegistrationForm from '../RegistrationForm';
 import logo from '../../images/logo.png';
 import './RegistrationPage.css'
 
-export const RegistrationPage = () => {
+export const RegistrationPage = ({history}) => {
     return (
         <section className='section registration'>
             <div className='registration__content'>
@@ -13,7 +13,7 @@ export const RegistrationPage = () => {
                         <img className='logo' src={logo} alt='Logo'></img>
                     </div>
                     <div className='registration__right'>
-                        <RegistrationForm />
+                        <RegistrationForm history={history} />
                     </div>        
                 </div>                       
         </section>

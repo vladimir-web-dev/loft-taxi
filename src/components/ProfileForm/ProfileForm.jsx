@@ -35,11 +35,12 @@ export function ProfileForm() {
       ...data,
       token
     };
-    console.log(payload);
+    
     dispatch(cardUpdateRequest(payload));
   };
 
   useEffect(() => {
+    
     dispatch(cardDetailsRequest(token));
   }, []);
 
@@ -59,7 +60,7 @@ export function ProfileForm() {
               </Typography>
             </Grid>
             <Grid item xs={12} container justify="center">
-              <Link to="/map" >Перейти на карту</Link>
+              <Link to="/map" onClick={console.log("test")}>Перейти на карту</Link>
             </Grid>
           </>
         ) : (

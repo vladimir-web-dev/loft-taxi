@@ -14,7 +14,7 @@ function Header () {
 
     const handleClick = e => {
         e.preventDefault();
-        console.log(e)
+        
         dispatch(logout());
     };
 

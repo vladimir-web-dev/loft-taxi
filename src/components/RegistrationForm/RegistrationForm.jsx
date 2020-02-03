@@ -9,12 +9,12 @@ import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import { useTheme } from '@material-ui/core/styles';
 
-function RegistrationForm (props) {
+function RegistrationForm ({history}) {
     const [ email, setEmail ] = React.useState("");
     const [ password, setPassword ] = React.useState("");
     const [ name, setName ] = React.useState("");
     const [ surname, setSurname ] = React.useState("");
-
+    
     const theme = useTheme();
     const dispatch = useDispatch()
 
@@ -22,10 +22,13 @@ function RegistrationForm (props) {
         e.preventDefault();
 
         const payload = {
-            email,
-            password,
-            name,
-            surname
+            data: {
+                email,
+                password,
+                name,
+                surname
+            },
+            history           
         };
         
         dispatch(registrationRequest(payload));

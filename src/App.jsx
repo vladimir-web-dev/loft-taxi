@@ -5,24 +5,17 @@ import MapPage from './components/MapPage';
 import ProfilePage from './components/ProfilePage';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import  PrivateRoute from './HOCs';
-import { getIsAuthenticated } from './modules/auth';
-import { useSelector } from 'react-redux';
 
 import './App.css';
 
 function App () {
-    const isAuthenticated = useSelector(state => getIsAuthenticated(state.authReducer));
-    console.log(isAuthenticated)
     return (
         <Switch>
-          <Redirect from="/" to='/login' exact />
-          {
-            isAuthenticated ? <Redirect from="/login" to='/map' /> : null
-          }
-          <Route path='/login' render={() => <LoginPage data-testid='login-page' />} />
-          <Route path='/registration' render={() => <RegistrationPage data-testid='registration-page' />} />
-          <PrivateRoute path='/map' component={MapPage} />
-          <PrivateRoute path='/profile' component={ProfilePage} ></PrivateRoute>
+          <Redirect from="/" to='/login' exact />          
+          <Route path='/login' render={props => <LoginPage data-testid='login-page' {...props} />} />
+          <Route path='/registration' render={props => <RegistrationPage data-testid='registration-page' {...props} />} />
+          <PrivateRoute path='/map'  render={props => <MapPage data-testid='map-page' {...props} /> } />
+          <PrivateRoute path='/profile' render={props => <ProfilePage data-testid='profile-page' {...props} /> } />
           <Redirect to='/login' />
         </Switch>
     );  

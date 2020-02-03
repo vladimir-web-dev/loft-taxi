@@ -3,6 +3,7 @@ import Header from '../Header';
 import Map from '../Map';
 
 const MapPage = props => {
+    console.log(props)
     return (
         <section className='section'>
             <Header />
@@ -11,4 +12,4 @@ const MapPage = props => {
     );
 }
 
-export default MapPage;;
+export default MapPage;

@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import { useTheme } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 
-function LoginForm () {
+function LoginForm ({history}) {
     const [ email, setEmail ] = React.useState("");
     const [ password, setPassword ] = React.useState("");
 
@@ -20,8 +20,11 @@ function LoginForm () {
         e.preventDefault();
 
         const payload = {
-            email,
-            password 
+            data: {
+                email,
+                password 
+            },
+            history
         };
         
         dispatch(authRequest(payload));

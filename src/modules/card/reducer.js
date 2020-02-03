@@ -25,7 +25,8 @@ const isUpdating = handleActions({
 }, false);
 
 const isUpdated = handleActions({
-    [cardUpdateRequest]: () => false,
+    [cardDetailsRequest]: () => false,
+    //[cardUpdateRequest]: () => false,
     [cardUpdateSuccess]: () => true,
 }, false);
 

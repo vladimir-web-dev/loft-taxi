@@ -13,12 +13,16 @@ import {
 export const mwAuthentication = store => next => action => {
     if (action.type === authRequest.toString()) {
         const url = 'https://loft-taxi.glitch.me/auth';
-        
-        apiCall(url, action.payload).then(
+        const { history, data } = action.payload;
+
+        apiCall(url, data).then(
             result => {
-                result.success 
-                ? store.dispatch(authSuccess(result.token))
-                : store.dispatch(authFailure(result.error))
+                if(result.success) {
+                    store.dispatch(authSuccess(result.token));
+                    history.push('/map');
+                } else {
+                    store.dispatch(authFailure(result.error))
+                }
             }
         );
     }
@@ -29,11 +33,17 @@ export const mwAuthentication = store => next => action => {
 export const mwRegistration = store => next => action => {
     if (action.type === registrationRequest.toString()) {
         const url = 'https://loft-taxi.glitch.me/register';
+        const { history, data } = action.payload;
 
-        apiCall(url, action.payload).then(
-            result => result.success 
-                ? store.dispatch(registrationSuccess(result.token))
-                : store.dispatch(registrationFailure(result.error))
+        apiCall(url, data).then(
+            result => {
+                if(result.success) {
+                    store.dispatch(registrationSuccess(result.token));
+                    history.push('/map');
+                } else {
+                    store.dispatch(registrationFailure(result.error))
+                }
+            }
         );
     }
 

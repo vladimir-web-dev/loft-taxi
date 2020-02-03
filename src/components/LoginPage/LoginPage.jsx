@@ -5,7 +5,7 @@ import logo from '../../images/logo.png';
 import './LoginPage.css';
 
 
-function LoginPage (props) {
+function LoginPage ({history}) {
     return (
         <section className='section login'>
             <div className='login__content'>
@@ -13,7 +13,7 @@ function LoginPage (props) {
                     <img className='logo' src={logo} alt="Logo"></img>
                 </div>
                 <div className='login__right'>
-                    <LoginForm />
+                    <LoginForm history={history} />
                 </div>        
             </div>            
         </section>

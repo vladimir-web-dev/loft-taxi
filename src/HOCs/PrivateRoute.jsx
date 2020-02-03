@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { getIsAuthenticated } from '../modules/auth';
 import { useSelector } from 'react-redux';
 
-const PrivateRoute = ({component: RouteComponent,  ...rest}) => {
+const PrivateRoute = ({render: RouteComponent,  ...rest}) => {
     const isAuthenticated = useSelector(state => getIsAuthenticated(state.authReducer));
 
     return (
