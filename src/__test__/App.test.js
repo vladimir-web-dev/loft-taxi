@@ -1,27 +1,58 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {render, cleanup} from '@testing-library/react';
+import {render, cleanup, fireEvent} from '@testing-library/react';
 import App from '../App';
+import { Router } from 'react-router-dom';
 
-afterEach(cleanup);
+import { initStore } from "../store";
+import { Provider } from 'react-redux'
+import { createMemoryHistory } from "history";
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
-})
+// afterEach(cleanup);
 
-it('matches snapshot', () => {
-    const {container} = render(<App />)
+jest.mock('mapbox-gl/dist/mapbox-gl', () => ({
+  Map: () => ({}),
+}));
 
-    expect(container).toMatchSnapshot(); 
-})
+it('renders without crashing, navigation works', () => {
+  const history = createMemoryHistory();
+  const store = initStore()
+  const { container, getByText } = render(
+    <Router history={history}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </Router>
+  );
 
-it('first render', () => {
-  const {queryByTestId} = render(<App />);
+  //Renders LoginPage => LoginForm components
+  expect(container).toHaveTextContent("Войти");
+  expect(container).toHaveTextContent("Зарегистрируйтесь");
 
-  expect(queryByTestId('login-page')).toBeTruthy();
-  expect(queryByTestId('registration-page')).not.toBeTruthy();
-  expect(queryByTestId('map-page')).not.toBeTruthy();
-  expect(queryByTestId('profile-page')).not.toBeTruthy();
-})
+  fireEvent.click(getByText('Зарегистрируйтесь'));
+
+  //Renders RegistrationPage => RegistrationForm components
+  expect(container).toHaveTextContent("Регистрация");
+
+});
+
+// it('renders without crashing', () => {
+//   const div = document.createElement('div');
+//   ReactDOM.render(<App />, div);
+//   ReactDOM.unmountComponentAtNode(div);
+// })
+
+// it('matches snapshot', () => {
+//     const {container} = render(<App />)
+
+//     expect(container).toMatchSnapshot(); 
+// })
+
+// it('first render', () => {
+//   const {queryByTestId} = render(<App />);
+
+//   expect(queryByTestId('login-page')).toBeTruthy();
+//   expect(queryByTestId('registration-page')).not.toBeTruthy();
+//   expect(queryByTestId('map-page')).not.toBeTruthy();
+//   expect(queryByTestId('profile-page')).not.toBeTruthy();
+// })

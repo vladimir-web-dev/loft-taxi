@@ -11,7 +11,6 @@ import './App.css';
 function App () {
     return (
         <Switch>
-          <Redirect from="/" to='/login' exact />          
           <Route path='/login' render={props => <LoginPage data-testid='login-page' {...props} />} />
           <Route path='/registration' render={props => <RegistrationPage data-testid='registration-page' {...props} />} />
           <PrivateRoute path='/map'  render={props => <MapPage data-testid='map-page' {...props} /> } />
