@@ -46,8 +46,8 @@ exports[`matches snapshot 1`] = `
               >
                 Уже зарегистрированы?
                 <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineNone MuiTypography-colorPrimary"
                   data-testid="link-login"
+                  href="/login"
                 >
                    Войти
                 </a>
@@ -113,7 +113,7 @@ exports[`matches snapshot 1`] = `
                       <input
                         aria-invalid="false"
                         class="MuiInputBase-input MuiInput-input MuiInputBase-inputMarginDense MuiInput-inputMarginDense"
-                        name="firstName"
+                        name="name"
                         placeholder="Имя"
                         required=""
                         type="text"
@@ -147,7 +147,7 @@ exports[`matches snapshot 1`] = `
                       <input
                         aria-invalid="false"
                         class="MuiInputBase-input MuiInput-input MuiInputBase-inputMarginDense MuiInput-inputMarginDense"
-                        name="lastName"
+                        name="surname"
                         placeholder="Фамилия"
                         required=""
                         type="text"

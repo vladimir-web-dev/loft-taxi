@@ -46,8 +46,8 @@ exports[`matches snapshot 1`] = `
               >
                 Новый пользователь? 
                 <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineNone MuiTypography-colorPrimary"
                   data-testid="link-register"
+                  href="/registration"
                 >
                    Зарегистрируйтесь
                 </a>

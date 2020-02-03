@@ -2,28 +2,40 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import RegistrationForm from '../RegistrationForm';
 import {render, cleanup} from '@testing-library/react';
+import { initStore } from "../../../store";
+import { Provider } from "react-redux";
+import { createMemoryHistory } from "history";
+import { Router } from "react-router-dom";
 
-afterEach(cleanup);
-
-it('renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<RegistrationForm changePage={() => {}}></RegistrationForm>, div);
+it("renders without crashing", () => {
+    const store = initStore();
+    const div = document.createElement("div");
+    const history = createMemoryHistory();
+  
+    ReactDOM.render(
+      <Router history={history}>
+        <Provider store={store}>
+          <RegistrationForm />
+        </Provider>
+      </Router>,
+      div
+    );
     ReactDOM.unmountComponentAtNode(div);
-})
-
-it('renders correct elemets', () => {
-    const { queryByTestId } = render(<RegistrationForm changePage={() => {}}></RegistrationForm>);
-
-    expect(queryByTestId('registration-form')).toBeTruthy();
-    expect(queryByTestId('link-login')).toBeTruthy();
-    expect(queryByTestId('input-fname')).toBeTruthy();
-    expect(queryByTestId('input-lname')).toBeTruthy();
-    expect(queryByTestId('input-email')).toBeTruthy();
-    expect(queryByTestId('input-pass')).toBeTruthy();
-    expect(queryByTestId('button-login')).toBeTruthy();
-})
-
-it('matches snapshot', () => {
-    const {container} = render(<RegistrationForm changePage={() => {}}></RegistrationForm>)
-    expect(container).toMatchSnapshot(); 
-})
+  });
+  
+  it("matches snapshot", () => {
+    const store = initStore();
+    const div = document.createElement("div");
+    const history = createMemoryHistory();
+  
+    const { container } = render(
+      <Router history={history}>
+        <Provider store={store}>
+          <RegistrationForm />
+        </Provider>
+      </Router>,
+      div
+    );
+    expect(container).toMatchSnapshot();
+  });
+  
