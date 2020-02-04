@@ -45,7 +45,7 @@ export function ProfileForm() {
   }, []);
 
   return (
-    <Paper elevatio={1} style={{ padding: theme.spacing(6, 6) }}>
+    <Paper elevatio={1} style={{ padding: theme.spacing(6, 6), marginTop: theme.spacing(6) }}>
       <Grid container alignItems="center" direction="column">
         <Grid item>
           <Typography variant="h3" component="h1" gutterBottom>
@@ -54,13 +54,16 @@ export function ProfileForm() {
         </Grid>
         {isUpdated ? (
           <>
-            <Grid item>
+            <Grid item style={{ marginBottom: theme.spacing(4) }}>
               <Typography variant="h5" component="h5" gutterBottom>
                 Платёжные данные обновлены. Теперь вы можете заказывать такси.
               </Typography>
             </Grid>
             <Grid item xs={12} container justify="center">
-              <Link to="/map" onClick={console.log("test")}>Перейти на карту</Link>
+              <Button 
+                component={Link} to='/map' 
+                color="secondary"
+                variant="contained">Перейти на карту</Button>
             </Grid>
           </>
         ) : (
@@ -69,7 +72,7 @@ export function ProfileForm() {
             className="formTag"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <Grid item container xs={12}>
+            <Grid item container xs={12} style={{ marginBottom: theme.spacing(4) }} spacing={3}>
               <Grid item container xs={6}>
                 <Paper elevatio={1} style={{ padding: theme.spacing(2, 2) }}>
                   <Grid container direction="column">

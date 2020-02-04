@@ -27,10 +27,12 @@ function Header () {
                     </Grid>
                     <Grid item container sm={6} justify='flex-end'>
                         <Grid item>
-                            <Link to='/map'>Карта</Link>
+                            <Button component={Link} to='/map'>Карта</Button>
+                            {/* <Link ></Link> */}
                         </Grid>
                         <Grid item>
-                            <Link to='/profile'>Профиль</Link>
+                            <Button component={Link} to='/profile'>Профиль</Button>
+                            {/* <Link to='/profile'>Профиль</Link> */}
                         </Grid>
                         <Grid item>
                             <Button onClick={handleClick}>Выйти</Button>
