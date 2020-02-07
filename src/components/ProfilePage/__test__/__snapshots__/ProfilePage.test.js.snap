@@ -3,7 +3,7 @@
 exports[`matches snapshot 1`] = `
 <div>
   <section
-    class="section"
+    class="section profile"
   >
     <header
       class="header"
@@ -31,18 +31,40 @@ exports[`matches snapshot 1`] = `
               class="MuiGrid-root MuiGrid-item"
             >
               <a
+                aria-disabled="false"
+                class="MuiButtonBase-root MuiButton-root MuiButton-text"
                 href="/map"
+                role="button"
+                tabindex="0"
               >
-                Карта
+                <span
+                  class="MuiButton-label"
+                >
+                  Карта
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
               </a>
             </div>
             <div
               class="MuiGrid-root MuiGrid-item"
             >
               <a
+                aria-disabled="false"
+                class="MuiButtonBase-root MuiButton-root MuiButton-text"
                 href="/profile"
+                role="button"
+                tabindex="0"
               >
-                Профиль
+                <span
+                  class="MuiButton-label"
+                >
+                  Профиль
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
               </a>
             </div>
             <div
@@ -76,7 +98,7 @@ exports[`matches snapshot 1`] = `
         <div
           class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
           elevatio="1"
-          style="padding: 48px 48px;"
+          style="padding: 48px 48px; margin-top: 48px;"
         >
           <div
             class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center"
@@ -95,7 +117,8 @@ exports[`matches snapshot 1`] = `
               data-testid="login-form"
             >
               <div
-                class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-grid-xs-12"
+                class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-item MuiGrid-grid-xs-12"
+                style="margin-bottom: 32px;"
               >
                 <div
                   class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-grid-xs-6"
@@ -158,7 +181,7 @@ exports[`matches snapshot 1`] = `
                               name="expiryDate"
                               readonly=""
                               type="text"
-                              value="February 3rd"
+                              value="February 7th"
                             />
                           </div>
                           

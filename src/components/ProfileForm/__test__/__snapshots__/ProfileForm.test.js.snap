@@ -5,7 +5,7 @@ exports[`matches snapshot 1`] = `
   <div
     class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
     elevatio="1"
-    style="padding: 48px 48px;"
+    style="padding: 48px 48px; margin-top: 48px;"
   >
     <div
       class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center"
@@ -24,7 +24,8 @@ exports[`matches snapshot 1`] = `
         data-testid="login-form"
       >
         <div
-          class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-grid-xs-12"
+          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-item MuiGrid-grid-xs-12"
+          style="margin-bottom: 32px;"
         >
           <div
             class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-grid-xs-6"
@@ -87,7 +88,7 @@ exports[`matches snapshot 1`] = `
                         name="expiryDate"
                         readonly=""
                         type="text"
-                        value="February 3rd"
+                        value="February 7th"
                       />
                     </div>
                     
