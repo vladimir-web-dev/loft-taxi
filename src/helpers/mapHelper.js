@@ -1,13 +1,13 @@
 import Mapboxgl from "mapbox-gl";
 
 export const initMap = container => {
-    return new Mapboxgl.Map({
-        container,
-        style: "mapbox://styles/mapbox/streets-v9",
-        center: [-6.261391086580829, 53.34022406028316],
-        zoom: 13
-    });
-}
+  return new Mapboxgl.Map({
+    container,
+    style: "mapbox://styles/mapbox/streets-v9",
+    center: [-6.261391086580829, 53.34022406028316],
+    zoom: 13
+  });
+};
 
 export const drawRoute = (map, coordinates) => {
   map.flyTo({
@@ -41,6 +41,7 @@ export const drawRoute = (map, coordinates) => {
 };
 
 export const removeRoute = map => {
-  if(map.getLayer("route"))
+  if (map.getLayer("route")) {
     map.removeLayer("route");
+  }
 };

@@ -4,7 +4,7 @@ import { RegistrationPage } from "./containers/registration/components/Registrat
 import { MapPage } from "./containers/map/components/MapPage";
 import { ProfilePage } from "./containers/profile/components/ProfilePage";
 import { Switch, Route, Redirect } from "react-router-dom";
-import PrivateRoute from "./HOCs";
+import { PrivateRoute } from "./HOCs";
 
 import "./App.css";
 

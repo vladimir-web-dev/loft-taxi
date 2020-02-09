@@ -27,9 +27,7 @@ export function LoginForm ({history}) {
             history
         };
         
-        dispatch(authRequest(payload));
-        setEmail("");
-        setPassword("");        
+        dispatch(authRequest(payload));     
     };
 
     return (

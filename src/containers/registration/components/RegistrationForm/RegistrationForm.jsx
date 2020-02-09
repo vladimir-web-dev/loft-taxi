@@ -33,11 +33,6 @@ export function RegistrationForm({ history }) {
     };
 
     dispatch(registrationRequest(payload));
-
-    setEmail("");
-    setPassword("");
-    setName("");
-    setSurname("");
   };
 
   return (
