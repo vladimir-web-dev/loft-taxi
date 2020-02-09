@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import Mapboxgl from "mapbox-gl";
 import { useSelector } from "react-redux";
-import { getRouteSelector } from "../../containers/map/store";
-import { drawRoute, removeRoute, initMap } from "../../helpers";
+import { getRouteSelector } from "../../store";
+import { drawRoute, removeRoute, initMap } from "../../../../helpers";
 
-function Map() {
+export function Map() {
   const mapRef = useRef({});
   const mapContainer = React.useRef(null);
   const route = useSelector(state => getRouteSelector(state.routeReducer));
@@ -30,5 +30,3 @@ function Map() {
 
   return <div ref={mapContainer} style={{ height: "100%" }}></div>;
 }
-
-export default Map;

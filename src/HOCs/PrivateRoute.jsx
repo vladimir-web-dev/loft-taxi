@@ -1,11 +1,10 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { getIsAuthenticated } from '../modules/auth';
+import { getIsAuthenticatedSelector } from '../containers/login/store';
 import { useSelector } from 'react-redux';
 
 const PrivateRoute = ({render: RouteComponent,  ...rest}) => {
-    const isAuthenticated = useSelector(state => getIsAuthenticated(state.authReducer));
+    const isAuthenticated = useSelector(state => getIsAuthenticatedSelector(state.authReducer));
 
     return (
         <Route 
@@ -17,11 +16,6 @@ const PrivateRoute = ({render: RouteComponent,  ...rest}) => {
         />
     );
 }
-
-// PrivateRoute.propTypes = {
-//     isAuthenticated: PropTypes.bool.isRequired,
-//     component: PropTypes.element.isRequired
-// }
 
 export default PrivateRoute;
 

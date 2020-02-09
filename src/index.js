@@ -4,7 +4,7 @@ import App from './App';
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { initStore } from './store';
+import { initStore } from './core/store';
 import { theme } from 'loft-taxi-mui-theme';
 
 import 'typeface-roboto';

@@ -1,0 +1,25 @@
+.login {   
+    background-size: cover;
+    background-position: center;
+    background-image: 
+        linear-gradient(rgba(0,0,0, .3), rgba(0,0,0, .4)),
+        url('../../../../images/background.png');
+}
+
+.login__content {
+    max-width: 900px;
+    width: 900px;
+}
+
+.login,
+.login__content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.login__left,
+.login__rght {
+    flex: 1;
+}
