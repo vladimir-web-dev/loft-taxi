@@ -35,11 +35,14 @@ const isAuthenticated = handleActions({
     [logout]: () => false
 }, false);
 
-const error = handleActions({   
+const authError = handleActions({   
     [authSuccess]: () => "",
     [authFailure]: (_state, action) => action.payload,  
+}, "");
+
+const registrationError = handleActions({    
     [registrationSuccess]: () => "",
     [registrationFailure]: (_state, action) => action.payload
 }, "");
 
-export default combineReducers({isAuthenticating, isAuthenticated, token, error});
+export default combineReducers({isAuthenticating, isAuthenticated, token, authError, registrationError});

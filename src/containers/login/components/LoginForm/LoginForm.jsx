@@ -1,74 +1,96 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { authRequest } from '../../../login/store';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import { useTheme } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useForm, Controller } from "react-hook-form";
+import { Link } from "react-router-dom";
+import { authRequest, getAuthErrorSelector } from "../../../login/store";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import formStyles from "../../../../css_modules/Form.module.css";
 
-export function LoginForm ({history}) {
-    const [ email, setEmail ] = React.useState("");
-    const [ password, setPassword ] = React.useState("");
+export function LoginForm({ history }) {
+  const errorMes = useSelector(state =>
+    getAuthErrorSelector(state.authReducer)
+  );
+  const { control, handleSubmit } = useForm();
+  const dispatch = useDispatch();
+  const hasError = errorMes.length > 0;
+  const loginError = hasError ? "Неверный логин" : "";
+  const passwordError = hasError ? "Неправильный пароль" : "";
 
-    const theme = useTheme();
-    const dispatch = useDispatch()
- 
-    const handleSubmit = e => {
-        e.preventDefault();
-
-        const payload = {
-            data: {
-                email,
-                password 
-            },
-            history
-        };
-        
-        dispatch(authRequest(payload));     
+  const onSubmit = data => {
+    const payload = {
+      data,
+      history
     };
+    
+    dispatch(authRequest(payload));
+  };
 
-    return (
-        <Paper elevatio={1} style={{padding: theme.spacing(6, 6)}}>
-            <form data-testid='login-form' className='formTag' onSubmit={handleSubmit}>
-                <Grid container   direction="column">
-                    <Grid item xs={12}>
-                        <Typography variant="h3" component="h1" gutterBottom>
-                            Войти
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={12}>
-                        Новый пользователь? <Link data-testid='link-register' to='/registration'> Зарегистрируйтесь</Link>   
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            data-testid='input-name' 
-                            onChange={e => setEmail(e.target.value)} 
-                            value={email}
-                            label='Имя пользователя' 
-                            placeholder='Имя пользователя'
-                            margin='dense'
-                            required
-                            fullWidth />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            data-testid='input-pass'  
-                            onChange={e => setPassword(e.target.value)} 
-                            value={password} 
-                            label='Пароль' 
-                            placeholder='Пароль' 
-                            margin='dense'
-                            required
-                            fullWidth />
-                    </Grid>
-                    <Grid item xs={12} container justify='flex-end' >
-                        <Button data-testid='button-login'  color='secondary' variant="contained" type='submit' >Войти</Button>
-                    </Grid>
-                </Grid>              
-            </form>
-        </Paper>    
-    )
+  return (
+    <form
+      data-testid="login-form"
+      className="formTag"
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <div className={formStyles.container}>
+        <h1 className={formStyles.heading}>Войти</h1>
+        <span className={formStyles.info}>
+          Новый пользователь?
+          <Link
+            className={formStyles.link}
+            data-testid="link-register"
+            to="/registration"
+          >
+            Зарегистрируйтесь
+          </Link>
+        </span>
+        <div className={formStyles.formRow}>
+          <div className={formStyles.formCol}>
+            <Controller
+              as={TextField}
+              control={control}
+              data-testid="input-name"
+              name="email"
+              type="email"
+              label="Имя пользователя"
+              placeholder="Имя пользователя"
+              defaultValue=""
+              error={hasError}
+              helperText={loginError}
+              margin="dense"
+              required
+              fullWidth
+            />
+          </div>
+        </div>
+        <div className={formStyles.formRow}>
+          <div className={formStyles.formCol}>
+            <Controller
+              as={TextField}
+              control={control}
+              data-testid="input-pass"
+              name="password"
+              label="Пароль"
+              placeholder="Пароль"
+              defaultValue=""
+              error={hasError}
+              helperText={passwordError}
+              margin="dense"
+              required
+              fullWidth
+            />
+          </div>
+        </div>
+        <Button
+          className={formStyles.rightBtn}
+          data-testid="button-login"
+          color="secondary"
+          variant="contained"
+          type="submit"
+        >
+          Войти
+        </Button>
+      </div>
+    </form>
+  );
 }

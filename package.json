@@ -9,6 +9,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.1.2",
+    "classnames": "^2.2.6",
     "loft-taxi-mui-theme": "^1.0.1",
     "mapbox-gl": "^1.6.1",
     "material-ui": "^0.20.2",

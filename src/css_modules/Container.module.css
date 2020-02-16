@@ -1,0 +1,95 @@
+.central {
+    height: 100%;
+    max-width: 980px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.vertical {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.mapContainer {
+    position: relative;
+    flex: 1;
+}
+
+.profileContainer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.formContainer {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.formContainerA {
+    padding: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.mapForm {
+    width: 480px;
+    max-width: 480px;
+    align-self: flex-start;
+}
+
+.profileForm {
+    align-self: center;
+    width: 754px;
+    max-width: 754px;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.col {
+    flex: 1;
+    min-width: 340px;
+}
+
+@media screen and (max-width: 715px) {
+    .logo {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+}
+
+.modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modalHeader {
+    margin: 0;
+}
+
+.paper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 3px;
+    padding: 20px;
+    box-shadow:
+    0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+}

@@ -1,34 +1,24 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
+import { useDispatch, useSelector } from "react-redux";
+import { useForm, Controller } from "react-hook-form";
+
+import { Link } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
-import Typography from "@material-ui/core/Typography";
-import { useTheme } from "@material-ui/core/styles";
-
-import { registrationRequest } from "../../../login/store";
+import { registrationRequest, getRegistrationErrorSelector } from "../../../login/store";
+import formStyles from "../../../../css_modules/Form.module.css";
 
 export function RegistrationForm({ history }) {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [name, setName] = React.useState("");
-  const [surname, setSurname] = React.useState("");
+  const errorMes = useSelector(state => getRegistrationErrorSelector(state.authReducer));
+  const hasError = errorMes.length > 0;
+  const emailError = hasError ? "Неверный адрес электронной почты" : "";
 
-  const theme = useTheme();
+  const { control, handleSubmit } = useForm();
   const dispatch = useDispatch();
 
-  const handleSubmit = e => {
-    e.preventDefault();
-
+  const onSubmit = data => {
     const payload = {
-      data: {
-        email,
-        password,
-        name,
-        surname
-      },
+      data,
       history
     };
 
@@ -39,67 +29,76 @@ export function RegistrationForm({ history }) {
     <form
       data-testid="registration-form"
       className="formTag"
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(onSubmit)}
     >
-      <Paper elevatio={1} style={{ padding: theme.spacing(6, 6) }}>
-        <Grid container direction="column">
-          <Grid item xs={12}>
-            <Typography variant="h3" component="h1" gutterBottom>
-              Регистрация
-            </Typography>
-          </Grid>
-          <Grid item xs={12}>
-            Уже зарегистрированы?
-            <Link data-testid="link-login" to="/login">
-              {" "}
-              Войти
-            </Link>
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
+      <div className={formStyles.container}>
+        <h1 className={formStyles.heading}>Регистрация</h1>
+        <span className={formStyles.info}>
+          Уже зарегистрированы?
+          <Link
+            className={formStyles.link}
+            data-testid="link-login"
+            to="/login"
+          >
+            Войти
+          </Link>
+        </span>
+        <div className={formStyles.formRow}>
+          <div className={formStyles.formCol}>
+          <Controller
+              as={TextField}
+              control={control}
+              defaultValue=""
+              error={hasError}
+              helperText={emailError}
+              name="email"
               data-testid="input-email"
-              onChange={e => setEmail(e.target.value)}
-              value={email}
               label="Адрес электронной почты"
               placeholder="Адрес электронной почты"
+              margin="dense"
+              type="email"
+              required
+              fullWidth
+            />
+          </div>
+        </div>
+        <div className={formStyles.formRow}>
+          <div className={formStyles.formCol}>
+            <Controller
+              as={TextField}
+              control={control}
+              defaultValue=""
+              data-testid="input-fname"
+              name="name"
+              label="Имя"
+              placeholder="Имя"
               margin="dense"
               required
               fullWidth
             />
-          </Grid>
-          <Grid item container xs={12} spacing={2}>
-            <Grid item xs={6}>
-              <TextField
-                data-testid="input-fname"
-                onChange={e => setName(e.target.value)}
-                name="name"
-                value={name}
-                label="Имя"
-                placeholder="Имя"
-                margin="dense"
-                required
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
-                data-testid="input-lname"
-                onChange={e => setSurname(e.target.value)}
-                name="surname"
-                value={surname}
-                label="Фамилия"
-                placeholder="Фамилия"
-                margin="dense"
-                required
-                fullWidth
-              />
-            </Grid>
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              data-testid="input-pass"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
+          </div>
+          <div className={formStyles.formCol}>
+            <Controller
+              as={TextField}
+              control={control}
+              defaultValue=""
+              data-testid="input-lname"
+              name="surname"
+              label="Фамилия"
+              placeholder="Фамилия"
+              margin="dense"
+              required
+              fullWidth
+            />
+          </div>
+        </div>
+        <div className={formStyles.formRow}>
+          <div className={formStyles.formCol}>
+            <Controller
+              as={TextField}
+              control={control}
+              defaultValue=""            
+              data-testid="input-pass"         
               name="password"
               label="Пароль"
               placeholder="Пароль"
@@ -107,19 +106,18 @@ export function RegistrationForm({ history }) {
               required
               fullWidth
             />
-          </Grid>
-          <Grid item xs={12} container justify="flex-end">
-            <Button
-              data-testid="button-login"
-              color="secondary"
-              variant="contained"
-              type="submit"
-            >
-              Войти
-            </Button>
-          </Grid>
-        </Grid>
-      </Paper>
+          </div>
+        </div>
+        <Button
+          className={formStyles.rightBtn}
+          data-testid="button-login"
+          color="secondary"
+          variant="contained"
+          type="submit"
+        >
+          Войти
+        </Button>
+      </div>
     </form>
   );
 }

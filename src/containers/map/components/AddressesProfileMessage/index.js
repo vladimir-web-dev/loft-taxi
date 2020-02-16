@@ -1,0 +1,1 @@
+export { AddressesProfileMessage } from './AddressesProfileMessage';

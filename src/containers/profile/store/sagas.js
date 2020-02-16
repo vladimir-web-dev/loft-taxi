@@ -16,7 +16,7 @@ function* updateCardDefails({ payload }) {
   return yield call(apiCallsHelper.post, URL_UPDATE_CARD, payload);
 }
 
-function* fetchCardDefails({ payload }) {
+function* fetchCardDetails({ payload }) {
   const url = URL_GET_CARD + payload;
 
   return yield call(apiCallsHelper.get, url);
@@ -35,7 +35,7 @@ function* watchCardUpdateRequest() {
 function* watchCardDetailsRequest() {
   while (true) {
     const action = yield take(cardDetailsRequest.toString());
-    const result = yield call(fetchCardDefails, action);
+    const result = yield call(fetchCardDetails, action);
     if (result.id) yield put(cardDetailsSuccess(result));
     else yield put(cardDetailsFailure(result.error));
   }

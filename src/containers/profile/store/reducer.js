@@ -15,18 +15,22 @@ const card = handleActions({
     [cardDetailsSuccess]: (_state, action) => action.payload,
 },{});
 
-const isUpdating = handleActions({
+const isUpdatingCard = handleActions({
     [cardUpdateRequest]: () => true,
     [cardUpdateSuccess]: () => false,
     [cardUpdateFailure]: () => false,
+   
+}, false);
+
+const isFetchingCardDetails  = handleActions({
     [cardDetailsRequest]: () => true,
     [cardDetailsSuccess]: () => false,
-    [cardDetailsFailure]: () => false
+    [cardDetailsFailure]: () => false   
 }, false);
+
 
 const isUpdated = handleActions({
     [cardDetailsRequest]: () => false,
-    //[cardUpdateRequest]: () => false,
     [cardUpdateSuccess]: () => true,
 }, false);
 
@@ -36,4 +40,4 @@ const error = handleActions({
     [cardDetailsFailure]: (_state, action) => action.payload
 }, false)
 
-export default combineReducers({isUpdating, isUpdated, card, error});
+export default combineReducers({isUpdatingCard, isFetchingCardDetails, isUpdated, card, error});

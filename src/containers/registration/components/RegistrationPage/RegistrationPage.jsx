@@ -1,20 +1,20 @@
 import React from "react";
 import { RegistrationForm } from "../RegistrationForm";
-
-import logo from "../../../../images/logo.png";
-import "./RegistrationPage.css";
+import { Logo } from "loft-taxi-mui-theme";
+import containerStyles from  "../../../../css_modules/Container.module.css";
 
 export const RegistrationPage = ({ history }) => {
   return (
-    <section className="section registration">
-      <div className="registration__content">
-        <div className="registration__left">
-          <img className="logo" src={logo} alt="Logo"></img>
+    <section className={containerStyles.central}>
+      <div className={containerStyles.content}>
+        <div className={containerStyles.col}>
+          <Logo />
         </div>
-        <div className="registration__right">
+        <div className={containerStyles.col}>
           <RegistrationForm history={history} />
-        </div>
+          </div>
       </div>
     </section>
+    
   );
 };
