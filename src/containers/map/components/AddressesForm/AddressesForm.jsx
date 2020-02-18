@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
+// import FormControl from "@material-ui/core/FormControl";
+ import Select from "react-select";
+// import InputLabel from "@material-ui/core/InputLabel";
+// import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import { getAddressesSelector, getAddresses, getRoute } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
@@ -48,42 +48,28 @@ export function AddressesForm() {
       <div className={formStyles.container}>
         <div className={formStyles.formRow}>
           <div className={formStyles.formCol}>
-            <FormControl fullWidth>
-              <InputLabel id="from-label-from">Откуда</InputLabel>
-              <Controller
+          <Controller
                 as={Select}
                 control={control}
                 rules={{ required: true }}
                 name="addressFrom"
                 defaultValue=""
-              >
-                {filteredAddressList.current.map((address, i) => (
-                  <MenuItem value={address} key={i}>
-                    {address}
-                  </MenuItem>
-                ))}
-              </Controller>
-            </FormControl>
+                isClearable
+                options={filteredAddressList.current.map(val => {return {value: val, label: val}})}
+              />
           </div>
         </div>
         <div className={formStyles.formRow}>
           <div className={formStyles.formCol}>
-            <FormControl fullWidth>
-              <InputLabel id="from-label-to">Куда</InputLabel>
-              <Controller
+          <Controller
                 as={Select}
                 rules={{ required: true }}
                 control={control}
                 name="addressTo"
                 defaultValue=""
-              >
-                {filteredAddressList.current.map((address, i) => (
-                  <MenuItem value={address} key={i}>
-                    {address}
-                  </MenuItem>
-                ))}
-              </Controller>
-            </FormControl>
+                isClearable={true}
+                options={filteredAddressList.current.map(val => {return {value: val, label: val}})}
+                />
           </div>
         </div>
         <Button fullWidth data-event="add" type="submit">

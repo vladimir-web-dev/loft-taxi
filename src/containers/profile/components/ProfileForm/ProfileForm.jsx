@@ -18,6 +18,8 @@ export function ProfileForm() {
   const { setValue, handleSubmit, control, errors, setError, clearError } = useForm();
   const hasCardNumberError = errors.cardNumber !== undefined;
   const cardNumberError = errors.cardNumber && errors.cardNumber.message;
+  const hasCVCNumberError = errors.cvc !== undefined;
+  const cvcNumberError = errors.cvc && errors.cvc.message;
   const dispatch = useDispatch();
   const token = useSelector(state => getTokenSelector(state.authReducer));
   const card = useSelector(state => getCardSelector(state.profileReducer));
@@ -31,7 +33,7 @@ export function ProfileForm() {
   }
 
   const onSubmit = data => {
-    if(!validateCardNumber(data.cardNumber))
+    if(!validateCardNumber(data.cardNumber) || !validateCVCNumber(data.cvc))
       return;
 
     const payload = {
@@ -41,6 +43,18 @@ export function ProfileForm() {
 
     dispatch(cardUpdateRequest(payload));
   };
+
+  const validateCVCNumber = value => {    
+
+    if(value.length !== 3) {
+      setError("cvc","notMatch","В cvc номере должно быть 3 цифры");
+      return false;
+    }   
+
+    clearError("cvc");
+    return true;
+      
+  }
 
   const validateCardNumber = value => {    
     const reg = new RegExp('^[0-9]+$');
@@ -125,6 +139,8 @@ export function ProfileForm() {
                   name="cvc"
                   label="CVC "
                   placeholder="CVC"
+                  error={hasCVCNumberError}
+                  helperText={cvcNumberError}
                   defaultValue=""
                   margin="dense"
                   required
