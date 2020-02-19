@@ -1,75 +1,80 @@
 import React, { useEffect } from "react";
-// import FormControl from "@material-ui/core/FormControl";
- import Select from "react-select";
-// import InputLabel from "@material-ui/core/InputLabel";
-// import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "react-select";
+import InputLabel from "@material-ui/core/InputLabel";
 import Button from "@material-ui/core/Button";
 import { getAddressesSelector, getAddresses, getRoute } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
-import { useRef } from "react";
 import formStyles from "../../../../css_modules/Form.module.css";
 import { useForm, Controller } from "react-hook-form";
-
 export function AddressesForm() {
   const dispatch = useDispatch();
   const { handleSubmit, watch, control } = useForm();
-
   const addressList = useSelector(state =>
     getAddressesSelector(state.routeReducer)
   );
-
-  let filteredAddressList = useRef([]);
+  let filteredAddressList = [];
   const addressFrom = watch("addressFrom");
   const addressTo = watch("addressTo");
-
   if (addressList.length > 0) {
-    filteredAddressList.current = addressList.filter(val => {
-      return val !== addressFrom && val !== addressTo;
+    filteredAddressList = addressList.filter(val => {
+      return val !== addressFrom.value && val !== addressTo.value;
     });
   }
-
   const onSubmit = data => {
-    const { addressFrom, addressTo } = data;
-
+    const {
+      addressFrom: { value: from },
+      addressTo: { value: to }
+    } = data;
     const payload = {
-      addressFrom,
-      addressTo
+      addressFrom: from,
+      addressTo: to
     };
-
     dispatch(getRoute(payload));
   };
-
   useEffect(() => {
     dispatch(getAddresses());
   }, []);
-
+  const options = filteredAddressList.length
+    ? filteredAddressList.map(el => ({ value: el, label: el }))
+    : [];
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={formStyles.container}>
         <div className={formStyles.formRow}>
           <div className={formStyles.formCol}>
-          <Controller
+            <FormControl fullWidth>
+              <InputLabel id="from-label-from">Откуда</InputLabel>
+              <Controller
                 as={Select}
                 control={control}
                 rules={{ required: true }}
                 name="addressFrom"
                 defaultValue=""
-                isClearable
-                options={filteredAddressList.current.map(val => {return {value: val, label: val}})}
-              />
+                options={options}
+                onChange={([selected]) => {
+                  return { value: selected };
+                }}
+              ></Controller>
+            </FormControl>
           </div>
         </div>
         <div className={formStyles.formRow}>
           <div className={formStyles.formCol}>
-          <Controller
+            <FormControl fullWidth>
+              <InputLabel id="from-label-to">Куда</InputLabel>
+              <Controller
                 as={Select}
                 rules={{ required: true }}
                 control={control}
+                options={options}
                 name="addressTo"
                 defaultValue=""
-                isClearable={true}
-                options={filteredAddressList.current.map(val => {return {value: val, label: val}})}
-                />
+                onChange={([selected]) => {
+                  return { value: selected };
+                }}
+              ></Controller>
+            </FormControl>
           </div>
         </div>
         <Button fullWidth data-event="add" type="submit">
